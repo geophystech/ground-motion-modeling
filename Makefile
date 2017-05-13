@@ -15,7 +15,7 @@
 
 CC = gcc
 
-CFLAGS  = -g -Wall -flto
+CFLAGS  = -g -Wall -Werror -Wshadow -march=native -flto
 
 LFLAGS = 
 

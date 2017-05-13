@@ -12,3 +12,56 @@
 //   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
+
+#include <stdint.h>
+
+//****************
+//*    TYPES     *
+//****************
+
+// VS30 data point
+typedef struct {
+  double lat;
+  double lon;
+  uint32_t vs30;
+} VS30_point;
+
+// earthquake location data
+typedef struct {
+  double lat;
+  double lon;
+  double depth;
+  double local_magnitude;
+  double moment_magnitude;
+} Earthquake;
+
+// AS2008 GMPE model data point
+typedef struct {
+  double lat;
+  double lon;
+  uint32_t vs30;
+  double hyp_distance; // Hypocentral distance in km
+  double f_1; // Part of the AS2008 formula responsible for the attenuation from
+              // the distance
+  double f_5; // Part of the AS2008 formula responsible for the nonlinear
+              // behavior of soils
+  double f_8; // Part of the AS2008 formula responsible for remote sources
+  double pga_1100;
+  double g; // Acceleration of gravity in fractions
+} AS2008_point;
+
+// Output data point after ALL calculations
+typedef struct {
+  double lat;
+  double lon;
+  double hyp_distance; // Hypocentral distance in km
+  double g;            // Acceleration of gravity in percent
+} GMM_point;
+
+//****************
+//* Funcs PROTO  *
+//****************
+
+// AS2008 GMPE
+void as2008_gmpe(const Earthquake EQ, VS30_point *const VS30_grid,
+                 GMM_point *const OUT_pga_data);
