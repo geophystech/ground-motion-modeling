@@ -13,15 +13,19 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-CC = clang
+CC = gcc
 
-CFLAGS  = -g -Wall
+CFLAGS  = -g -Wall -flto
 
-LFLAGS = third_party/GeographicLib-1.48/legacy/C/geodesic.c
+LFLAGS = 
 
-TARGET = src/gmm
+SOURCES = third_party/GeographicLib-1.48/legacy/C/geodesic.c src/gmm.c 
 
-all: $(TARGET)
+EXECUTABLE = bin/gmm
 
-$(TARGET): $(TARGET).c
-	$(CC) $(CFLAGS) -o $(TARGET) $(TARGET).c $(LFLAGS)
+all:
+	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(SOURCES)
+
+.PHONY : clean
+clean :
+	-rm $(EXECUTABLE)
