@@ -13,7 +13,16 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+#include <stddef.h>
 #include <stdint.h>
+#include <stdio.h>
+
+//****************
+//*  GLOBALS     *
+//****************
+
+// number of grid points from grid file
+size_t grid_size_global;
 
 //****************
 //*    TYPES     *
@@ -59,9 +68,11 @@ typedef struct {
 } GMM_point;
 
 //****************
-//* Funcs PROTO  *
+//*  PROTOTYPES  *
 //****************
 
+// Read VS30 grid file and return pointer to allocated array of VS30_points
+VS30_point *read_vs30_grid(const char *filename);
 // AS2008 GMPE
-void as2008_gmpe(const Earthquake EQ, VS30_point *const VS30_grid,
-                 GMM_point *const OUT_pga_data);
+void as2008_gmpe(const Earthquake eq, VS30_point *const vs30_grid,
+                 size_t vs30_size, GMM_point *const out_pga_data);
