@@ -13,6 +13,16 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
+//****************
+//*  DEFINES     *
+//****************
+#define GRID_COLUMNS 3
+
+
+//****************
+//*  INCLUDES    *
+//****************
+
 #include <stddef.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -22,7 +32,7 @@
 //****************
 
 // number of grid points from grid file
-size_t grid_size_global;
+int64_t grid_size_global;
 
 //****************
 //*    TYPES     *
@@ -46,9 +56,9 @@ typedef struct {
 
 // AS2008 GMPE model data point
 typedef struct {
-  double lat;
-  double lon;
-  uint32_t vs30;
+  double *lat;
+  double *lon;
+  uint32_t *vs30;
   double hyp_distance; // Hypocentral distance in km
   double f_1; // Part of the AS2008 formula responsible for the attenuation from
               // the distance
@@ -61,8 +71,8 @@ typedef struct {
 
 // Output data point after ALL calculations
 typedef struct {
-  double lat;
-  double lon;
+  double *lat;
+  double *lon;
   double hyp_distance; // Hypocentral distance in km
   double g;            // Acceleration of gravity in percent
 } GMM_point;

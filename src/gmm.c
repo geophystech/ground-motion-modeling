@@ -24,10 +24,10 @@ int main(void) {
          test_eq.lon, test_eq.depth, test_eq.local_magnitude,
          test_eq.moment_magnitude);
 
-  char *testVS30_1 = "examples/testVS30_1.txt";
+  char *vs30_file_config = "examples/grids/vs30_test.xyz";
 
   // get pointer to allocated vs30 grid
-  VS30_point *vs30_grid = read_vs30_grid(testVS30_1);
+  VS30_point *vs30_grid = read_vs30_grid(vs30_file_config);
 
   // debugs
   printf("Number of lines = %ld\n", grid_size_global);
@@ -78,11 +78,24 @@ VS30_point *read_vs30_grid(const char *filename) {
     exit(EXIT_FAILURE);
   }
 
-  // filling vs30 grid array
+  // Parse vs30 grid file and filling vs30 grid array
+  size_t line_number = 1;
+  size_t line_len = 0;
+  char *parsing_line = NULL;
   for (size_t i = 0; i < grid_size_global; i++) {
-    fscanf(vs30_grid_file, "%lf %lf %d", &vs30_point_array[i].lon,
-           &vs30_point_array[i].lat, &vs30_point_array[i].vs30);
+    getline(&parsing_line, &line_len, vs30_grid_file);
+    if ((sscanf(parsing_line, "%lf %lf %d\n", &vs30_point_array[i].lon,
+                &vs30_point_array[i].lat, &vs30_point_array[i].vs30)) !=
+        GRID_COLUMNS) {
+      fprintf(stderr, "ERROR: LINE %ld at input vs30 grid file has wrong "
+                      "format. Please use LAT LON VS30 order",
+              line_number);
+      exit(EXIT_FAILURE);
+    } else {
+      line_number++;
+    };
   };
+  free(parsing_line);
 
   // close file and return pointer
   fclose(vs30_grid_file);
