@@ -37,6 +37,9 @@ int64_t grid_size_global;
 //*    TYPES     *
 //****************
 
+// main config
+
+
 // VS30 data point
 typedef struct {
   double lat;

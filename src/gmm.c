@@ -16,6 +16,7 @@
 #include "gmm.h"
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 
 int main(void) {
 
@@ -35,24 +36,31 @@ int main(void) {
 
   print_as2008_parameters(ptr_as2008_conf, NULL);
 
-  char *vs30_file_config = "examples/grids/vs30_test.xyz";
+  // char *vs30_file_config = "examples/grids/vs30_test.xyz";
+  char *vs30_file_config = "../../temp/SakhVS30.txt";
 
   // get pointer to allocated vs30 grid
+  clock_t begin = clock();
   VS30_point *vs30_grid = read_vs30_grid(vs30_file_config);
+  clock_t end = clock();
+  printf("\nTime to read vs30 file takes %lf seconds \n",
+         (double)(end - begin) / CLOCKS_PER_SEC);
 
   // Using AS2008 model
+  begin = clock();
   GMM_point_pga *pga_grid = as2008_gmpe(eq_location, as2008_conf, vs30_grid);
+  end = clock();
+  printf("\nTime to AS2008 modeling file takes %lf seconds \n",
+         (double)(end - begin) / CLOCKS_PER_SEC);
 
   // debugs
   printf("\nNumber of lines in grid file = %ld\n", grid_size_global);
-  print_gpa_grid(pga_grid, NULL);
+  // print_gpa_grid(pga_grid, NULL);
 
-  // printf("SIZE of vs30_grid is %lu\nNUMBER of elements is %lu\n",
-  //       sizeof *vs30_grid, (sizeof *vs30_grid) / (sizeof vs30_grid[0]));
-  for (size_t i = 0; i < grid_size_global; i++) {
-    printf("%lf %lf %lf\n", vs30_grid[i].lon, vs30_grid[i].lat,
-           vs30_grid[i].vs30);
-  };
+  // for (size_t i = 0; i < grid_size_global; i++) {
+  //  printf("%lf %lf %lf\n", vs30_grid[i].lon, vs30_grid[i].lat,
+  //         vs30_grid[i].vs30);
+  //};
 
   // free and exit
   free(vs30_grid);
@@ -226,7 +234,7 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
     pga_point_array[i].g = as2008_point_array[i].g * 100;
   };
 
-  print_as2008_points(as2008_point_array, NULL);
+  // print_as2008_points(as2008_point_array, NULL);
 
   // free(geoid);
   free(as2008_point_array);
