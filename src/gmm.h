@@ -38,7 +38,9 @@ int64_t grid_size_global;
 //****************
 
 // main config
+typedef struct {
 
+} main_config;
 
 // VS30 data point
 typedef struct {

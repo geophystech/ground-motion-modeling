@@ -19,7 +19,10 @@ CFLAGS  = -g -Wall -Werror -Wshadow -march=native -O2 -flto -std=c11
 
 LFLAGS = 
 
-SOURCES = third_party/GeographicLib-1.48/legacy/C/geodesic.c src/gmm.c 
+SOURCES = third_party/GeographicLib-1.48/legacy/C/geodesic.c \
+	  src/config_data.c \
+	  src/gmpe_models.c \
+	  src/gmm.c 
 
 EXECUTABLE = bin/gmm
 
