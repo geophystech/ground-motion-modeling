@@ -37,10 +37,8 @@ int64_t grid_size_global;
 //*    TYPES     *
 //****************
 
-// main config
-typedef struct {
-
-} main_config;
+// desktop config
+typedef struct { char *vs30_file_config; } DESKTOP_parameters;
 
 // VS30 data point
 typedef struct {
@@ -106,6 +104,10 @@ typedef struct {
 
 // Read VS30 grid file and return pointer to allocated array of VS30_points
 VS30_point *read_vs30_grid(const char *filename);
+// Parse config file
+size_t parse_config_file_desktop(const char *filename,
+                                 DESKTOP_parameters *desktop_conf,
+                                 AS2008_parameters *ptr_as2008_conf);
 // AS2008 GMPE
 // void as2008_gmpe(const Earthquake eq, VS30_point *const vs30_grid,
 //                 size_t vs30_size, GMM_point *const out_pga_data);

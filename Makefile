@@ -15,19 +15,21 @@
 
 CC = gcc
 
-CFLAGS  = -g -Wall -Werror -Wshadow -march=native -O2 -flto -std=c11
+CFLAGS = -g -Wall -Werror -Wshadow -march=native -O2 -flto -std=c11 
 
-LFLAGS = 
+LFLAGS =
 
 SOURCES = third_party/GeographicLib-1.48/legacy/C/geodesic.c \
 	  src/config_data.c \
 	  src/gmpe_models.c \
-	  src/gmm.c 
+	  src/gmm.c \
+	  $(shell pkg-config --cflags --libs glib-2.0)
+
 
 EXECUTABLE = bin/gmm
 
 all:
-	$(CC) $(CFLAGS) -o $(EXECUTABLE) $(SOURCES)
+	$(CC) $(CFLAGS) $(LFLAGS) -o $(EXECUTABLE) $(SOURCES)
 
 .PHONY : clean
 clean :

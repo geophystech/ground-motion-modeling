@@ -17,8 +17,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main(void) {
-
+int main(int argc, char **argv ) {
+  
   // test case
   Earthquake eq_location = {51.92, 143.04, 13, 6.0};
   Earthquake *ptr_eq_location = &eq_location;
@@ -28,22 +28,23 @@ int main(void) {
          ptr_eq_location->lat, ptr_eq_location->lon, ptr_eq_location->depth,
          ptr_eq_location->local_magnitude, ptr_eq_location->moment_magnitude);
 
-  AS2008_parameters as2008_conf = {
-      0.804,  -0.9679, 0.265, -0.231, -0.398, -0.0372, 0.9445, -0.0067,
-      -1.186, 1.88,    6.75,  4.5,    1.18,   865.1,   1500,   1100};
+  DESKTOP_parameters desktop_conf = {0};
+  DESKTOP_parameters *ptr_desktop_conf = &desktop_conf;
+
+  AS2008_parameters as2008_conf = {0};
   AS2008_parameters *ptr_as2008_conf = &as2008_conf;
 
+  parse_config_file_desktop(argv[1], ptr_desktop_conf, ptr_as2008_conf);
   print_as2008_parameters(ptr_as2008_conf, NULL);
-
-  // char *vs30_file_config = "examples/grids/vs30_test.xyz";
-  char *vs30_file_config = "../../temp/SakhVS30.txt";
 
   // get pointer to allocated vs30 grid
   clock_t begin = clock();
-  VS30_point *vs30_grid = read_vs30_grid(vs30_file_config);
+  VS30_point *vs30_grid = read_vs30_grid(ptr_desktop_conf->vs30_file_config);
   clock_t end = clock();
   printf("\nTime to read vs30 file takes %lf seconds \n",
          (double)(end - begin) / CLOCKS_PER_SEC);
+  
+  printf("\nTotal lines in grid file = %ld\n", grid_size_global);
 
   // Using AS2008 model
   begin = clock();
@@ -53,8 +54,7 @@ int main(void) {
          (double)(end - begin) / CLOCKS_PER_SEC);
 
   // debugs
-  printf("\nNumber of lines in grid file = %ld\n", grid_size_global);
-  // print_gpa_grid(pga_grid, NULL);
+  print_gpa_grid(pga_grid, NULL);
 
   // for (size_t i = 0; i < grid_size_global; i++) {
   //  printf("%lf %lf %lf\n", vs30_grid[i].lon, vs30_grid[i].lat,
@@ -65,7 +65,7 @@ int main(void) {
   free(vs30_grid);
   free(pga_grid);
 
-  return 0;
+  exit(EXIT_SUCCESS);
 }
 
 void print_as2008_points(const AS2008_point *const AS2008_point_array_const,
