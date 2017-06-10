@@ -20,6 +20,7 @@
 int main(int argc, char **argv) {
 
   Earthquake eq_location;
+  // Earthquake eq_location = {51.92, 143.04, 13, 6.0};
   Earthquake *ptr_eq_location = &eq_location;
 
   DESKTOP_parameters desktop_conf = {0};
@@ -52,9 +53,6 @@ int main(int argc, char **argv) {
     printf("Mw=");
     scanf("%lf", &ptr_eq_location->moment_magnitude);
   }
-  // test case
-  // Earthquake eq_location = {51.92, 143.04, 13, 6.0};
-  // Earthquake *ptr_eq_location = &eq_location;
 
   printf("\n--------------EARTHQUAKE LOCATION--------------- \n lat = %f\tlon "
          "= %f\n depth = %f\tMl = %f\n Mw = %f \n",
@@ -77,8 +75,9 @@ int main(int argc, char **argv) {
   printf("\nTime to AS2008 modeling file takes %lf seconds \n",
          (double)(end - begin) / CLOCKS_PER_SEC);
 
-  // debugs
-  print_gpa_grid(pga_grid, NULL);
+  // OUT
+  char *pga_grid_out_file_name = PGA_GRID_FILE_NAME;
+  print_pga_grid(pga_grid, pga_grid_out_file_name);
 
   // for (size_t i = 0; i < grid_size_global; i++) {
   //  printf("%lf %lf %lf\n", vs30_grid[i].lon, vs30_grid[i].lat,
@@ -135,11 +134,22 @@ void print_as2008_parameters(const AS2008_parameters *const as2008_conf,
   }
 };
 
-void print_gpa_grid(const GMM_point_pga *const pga_grid_const,
+void print_pga_grid(const GMM_point_pga *const pga_grid_const,
                     const char *const filename) {
 
   if (filename != NULL) {
-    // print to log file
+
+    FILE *pga_grid_out_file;
+    if ((pga_grid_out_file = fopen(filename, "w+")) == NULL) {
+      perror("\n ERROR: PGA out file can not be openned");
+      exit(EXIT_FAILURE);
+    }
+
+    for (size_t i = 0; i < grid_size_global; i++) {
+      fprintf(pga_grid_out_file, "%lf %lf %3.2lf\n", *pga_grid_const[i].lon,
+              *pga_grid_const[i].lat, pga_grid_const[i].g);
+    };
+
   } else {
     // print to stdout
     printf("\n------------------ PGA GRID--------------------- \n"
