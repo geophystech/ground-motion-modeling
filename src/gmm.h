@@ -38,7 +38,10 @@ int64_t grid_size_global;
 //****************
 
 // desktop config
-typedef struct { char *vs30_file_config; } DESKTOP_parameters;
+typedef struct {
+  char *vs30_file_config;
+  char *base_model;
+} DESKTOP_parameters;
 
 // VS30 data point
 typedef struct {

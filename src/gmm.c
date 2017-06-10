@@ -17,8 +17,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main(int argc, char **argv ) {
-  
+int main(int argc, char **argv) {
+
   // test case
   Earthquake eq_location = {51.92, 143.04, 13, 6.0};
   Earthquake *ptr_eq_location = &eq_location;
@@ -34,7 +34,15 @@ int main(int argc, char **argv ) {
   AS2008_parameters as2008_conf = {0};
   AS2008_parameters *ptr_as2008_conf = &as2008_conf;
 
-  parse_config_file_desktop(argv[1], ptr_desktop_conf, ptr_as2008_conf);
+  if (argv[1] == NULL) {
+    printf(" ERROR: No configuration file specified\n Please use:\n \tgmm "
+           "<path_to_config_file>\n");
+    exit(EXIT_FAILURE);
+
+  } else {
+    parse_config_file_desktop(argv[1], ptr_desktop_conf, ptr_as2008_conf);
+  };
+
   print_as2008_parameters(ptr_as2008_conf, NULL);
 
   // get pointer to allocated vs30 grid
@@ -43,7 +51,7 @@ int main(int argc, char **argv ) {
   clock_t end = clock();
   printf("\nTime to read vs30 file takes %lf seconds \n",
          (double)(end - begin) / CLOCKS_PER_SEC);
-  
+
   printf("\nTotal lines in grid file = %ld\n", grid_size_global);
 
   // Using AS2008 model
@@ -78,15 +86,13 @@ void print_as2008_points(const AS2008_point *const AS2008_point_array_const,
     // print to stdout
     printf("\n----------------AS2008 POINTS------------------- \n"
            "%s \t\t%s \t\t%s \t\t%s \t\t%s \t\t%s \t\t%s \t\t%s \t%s\n",
-           "lon", "lat", "vs30", "r_rup", "f1", "f5", "f8", "pga1100",
-           "g");
+           "lon", "lat", "vs30", "r_rup", "f1", "f5", "f8", "pga1100", "g");
     for (size_t i = 0; i < grid_size_global; i++) {
       printf("%lf \t%lf \t%lf \t%lf \t\t%lf \t%lf \t%lf \t%lf \t%lf\n",
              *AS2008_point_array_const[i].lon, *AS2008_point_array_const[i].lat,
              *AS2008_point_array_const[i].vs30,
-             AS2008_point_array_const[i].r_rup,
-             AS2008_point_array_const[i].f1, AS2008_point_array_const[i].f5,
-             AS2008_point_array_const[i].f8,
+             AS2008_point_array_const[i].r_rup, AS2008_point_array_const[i].f1,
+             AS2008_point_array_const[i].f5, AS2008_point_array_const[i].f8,
              AS2008_point_array_const[i].pga1100,
              AS2008_point_array_const[i].g);
     };
