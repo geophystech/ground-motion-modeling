@@ -30,9 +30,9 @@ int main(int argc, char **argv) {
   AS2008_parameters *ptr_as2008_conf = &as2008_conf;
 
   if (argv[1] == NULL) {
-    printf(" ERROR: No configuration file specified\n Please use:\n \tgmm "
-           "<path_to_config_file>\n");
-    exit(EXIT_FAILURE);
+    printf(" Usage:\n\t"
+           "gmm <path_to_config_file> <path_to_s_file>\n");
+    exit(EXIT_SUCCESS);
 
   } else {
     parse_config_file_desktop(argv[1], ptr_desktop_conf, ptr_as2008_conf);
@@ -149,7 +149,7 @@ void print_pga_grid(const GMM_point_pga *const pga_grid_const,
       fprintf(pga_grid_out_file, "%lf %lf %3.2lf\n", *pga_grid_const[i].lon,
               *pga_grid_const[i].lat, pga_grid_const[i].g);
     };
-
+    printf("\n PGA grid printed to %s file\n", filename);
     fclose(pga_grid_out_file);
 
   } else {
