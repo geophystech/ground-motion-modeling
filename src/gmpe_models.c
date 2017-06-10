@@ -127,7 +127,7 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
   for (size_t i = 0; i < grid_size_global; i++) {
     pga_point_array[i].lon = &vs30_grid[i].lon;
     pga_point_array[i].lat = &vs30_grid[i].lat;
-    pga_point_array[i].hyp_distance = as2008_point_array[i].r_rup;
+    pga_point_array[i].r_rup = as2008_point_array[i].r_rup;
     pga_point_array[i].g = as2008_point_array[i].g * 100;
   };
 

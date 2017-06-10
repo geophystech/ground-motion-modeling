@@ -121,12 +121,12 @@ void print_gpa_grid(const GMM_point_pga *const pga_grid_const,
   } else {
     // print to stdout
     printf("\n------------------ PGA GRID--------------------- \n"
-           "%s \t\t%s \t\t%s \t%s \n",
-           "lon", "lat", "hyp_distance", "g%");
+           "%s \t\t%s \t\t%s \t\t%s \n",
+           "lon", "lat", "r_rup", "g%");
 
     for (size_t i = 0; i < grid_size_global; i++) {
       printf("%lf \t%lf \t%lf \t%3.2lf\n", *pga_grid_const[i].lon,
-             *pga_grid_const[i].lat, pga_grid_const[i].hyp_distance,
+             *pga_grid_const[i].lat, pga_grid_const[i].r_rup,
              pga_grid_const[i].g);
     };
   };

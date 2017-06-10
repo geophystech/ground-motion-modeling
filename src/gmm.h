@@ -60,8 +60,8 @@ typedef struct {
 typedef struct {
   double *lat;
   double *lon;
-  double hyp_distance; // Hypocentral distance in km
-  double g;            // Acceleration of gravity in percent rounded to ggg.gg
+  double r_rup; // Hypocentral distance in km
+  double g;     // Acceleration of gravity in percent rounded to ggg.gg
 } GMM_point_pga;
 
 // AS2008 formula paramaters
