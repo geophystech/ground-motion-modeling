@@ -65,7 +65,7 @@ size_t parse_config_file_desktop(const char *filename,
   // Model names set
   char *as2008 = "AS2008";
 
-  if (strcmp(ptr_desktop_conf->base_model,as2008) == 0) {
+  if (strcmp(ptr_desktop_conf->base_model, as2008) == 0) {
     //
     // Parse AS2008 parameters
     //
@@ -232,7 +232,8 @@ size_t parse_config_file_desktop(const char *filename,
 
   // default case
   else if (1) {
-    printf(" ERROR: You did not set any of the well-known GMM models\n Please review config file\n");
+    printf(" ERROR: You did not set any of the well-known GMM models\n Please "
+           "review config file\n");
     exit(EXIT_FAILURE);
   }
 

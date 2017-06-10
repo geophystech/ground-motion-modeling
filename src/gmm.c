@@ -19,14 +19,8 @@
 
 int main(int argc, char **argv) {
 
-  // test case
-  Earthquake eq_location = {51.92, 143.04, 13, 6.0};
+  Earthquake eq_location;
   Earthquake *ptr_eq_location = &eq_location;
-
-  printf("\n--------------EARTHQUAKE LOCATION--------------- \n lat = %f\tlon "
-         "= %f\n depth = %f\tMl = %f\n Mw = %f \n",
-         ptr_eq_location->lat, ptr_eq_location->lon, ptr_eq_location->depth,
-         ptr_eq_location->local_magnitude, ptr_eq_location->moment_magnitude);
 
   DESKTOP_parameters desktop_conf = {0};
   DESKTOP_parameters *ptr_desktop_conf = &desktop_conf;
@@ -44,6 +38,28 @@ int main(int argc, char **argv) {
   };
 
   print_as2008_parameters(ptr_as2008_conf, NULL);
+
+  if (argv[2] == NULL) {
+    puts("\nNo S-file given, please enter earthquake parameters:");
+    printf("Lat=");
+    scanf("%lf", &ptr_eq_location->lat);
+    printf("Lon=");
+    scanf("%lf", &ptr_eq_location->lon);
+    printf("Depth=");
+    scanf("%lf", &ptr_eq_location->depth);
+    printf("Ml=");
+    scanf("%lf", &ptr_eq_location->local_magnitude);
+    printf("Mw=");
+    scanf("%lf", &ptr_eq_location->moment_magnitude);
+  }
+  // test case
+  // Earthquake eq_location = {51.92, 143.04, 13, 6.0};
+  // Earthquake *ptr_eq_location = &eq_location;
+
+  printf("\n--------------EARTHQUAKE LOCATION--------------- \n lat = %f\tlon "
+         "= %f\n depth = %f\tMl = %f\n Mw = %f \n",
+         ptr_eq_location->lat, ptr_eq_location->lon, ptr_eq_location->depth,
+         ptr_eq_location->local_magnitude, ptr_eq_location->moment_magnitude);
 
   // get pointer to allocated vs30 grid
   clock_t begin = clock();
