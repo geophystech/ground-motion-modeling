@@ -141,7 +141,7 @@ void print_pga_grid(const GMM_point_pga *const pga_grid_const,
 
     FILE *pga_grid_out_file;
     if ((pga_grid_out_file = fopen(filename, "w+")) == NULL) {
-      perror("\n ERROR: PGA out file can not be openned");
+      perror("\n ERROR: pga XYZ out file can not be openned");
       exit(EXIT_FAILURE);
     }
 
@@ -149,6 +149,8 @@ void print_pga_grid(const GMM_point_pga *const pga_grid_const,
       fprintf(pga_grid_out_file, "%lf %lf %3.2lf\n", *pga_grid_const[i].lon,
               *pga_grid_const[i].lat, pga_grid_const[i].g);
     };
+
+    fclose(pga_grid_out_file);
 
   } else {
     // print to stdout
