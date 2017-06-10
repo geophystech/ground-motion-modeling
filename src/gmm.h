@@ -90,7 +90,7 @@ typedef struct {
   double *lat;
   double *lon;
   double *vs30;
-  double hyp_distance; // Hypocentral distance in km
+  double r_rup; // Hypocentral distance in km
   double f1;
   double f5;
   double f8;

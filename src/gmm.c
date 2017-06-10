@@ -78,13 +78,13 @@ void print_as2008_points(const AS2008_point *const AS2008_point_array_const,
     // print to stdout
     printf("\n----------------AS2008 POINTS------------------- \n"
            "%s \t\t%s \t\t%s \t\t%s \t\t%s \t\t%s \t\t%s \t\t%s \t%s\n",
-           "lon", "lat", "vs30", "hyp_distance", "f1", "f5", "f8", "pga1100",
+           "lon", "lat", "vs30", "r_rup", "f1", "f5", "f8", "pga1100",
            "g");
     for (size_t i = 0; i < grid_size_global; i++) {
       printf("%lf \t%lf \t%lf \t%lf \t\t%lf \t%lf \t%lf \t%lf \t%lf\n",
              *AS2008_point_array_const[i].lon, *AS2008_point_array_const[i].lat,
              *AS2008_point_array_const[i].vs30,
-             AS2008_point_array_const[i].hyp_distance,
+             AS2008_point_array_const[i].r_rup,
              AS2008_point_array_const[i].f1, AS2008_point_array_const[i].f5,
              AS2008_point_array_const[i].f8,
              AS2008_point_array_const[i].pga1100,

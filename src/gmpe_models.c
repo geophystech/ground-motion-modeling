@@ -51,13 +51,13 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
   //
   for (size_t i = 0; i < grid_size_global; i++) {
 
-    // hypocentral distance
+    // Rrup (hypocentral distance)
     as2008_point_array[i].lon = &vs30_grid[i].lon;
     as2008_point_array[i].lat = &vs30_grid[i].lat;
     as2008_point_array[i].vs30 = &vs30_grid[i].vs30;
     geod_inverse(&geoid, eq.lat, eq.lon, *as2008_point_array[i].lat,
                  *as2008_point_array[i].lon, &epicentral_distance, 0, 0);
-    as2008_point_array[i].hyp_distance =
+    as2008_point_array[i].r_rup =
         sqrt(pow((epicentral_distance / 1000), 2) + pow(eq.depth, 2));
 
     // f1
@@ -66,23 +66,23 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
           as2008_in.a1 + as2008_in.a4 * (magnitude - as2008_in.c1) +
           as2008_in.a8 * pow((8.5 - magnitude), 2) +
           (as2008_in.a2 + as2008_in.a3 * (magnitude - as2008_in.c1)) *
-              log(sqrt(pow(as2008_point_array[i].hyp_distance, 2) +
+              log(sqrt(pow(as2008_point_array[i].r_rup, 2) +
                        pow(as2008_in.c4, 2)));
     } else {
       as2008_point_array[i].f1 =
           as2008_in.a1 + as2008_in.a5 * (magnitude - as2008_in.c1) +
           as2008_in.a8 * pow((8.5 - magnitude), 2) +
           (as2008_in.a2 + as2008_in.a3 * (magnitude - as2008_in.c1)) *
-              log(sqrt(pow(as2008_point_array[i].hyp_distance, 2) +
+              log(sqrt(pow(as2008_point_array[i].r_rup, 2) +
                        pow(as2008_in.c4, 2)));
     }
 
     // f8
-    if (as2008_point_array[i].hyp_distance < 100) {
+    if (as2008_point_array[i].r_rup < 100) {
       as2008_point_array[i].f8 = 0;
     } else {
       as2008_point_array[i].f8 = as2008_in.a18 *
-                                 (as2008_point_array[i].hyp_distance - 100) *
+                                 (as2008_point_array[i].r_rup - 100) *
                                  as2008_in.t6;
     };
 
@@ -127,7 +127,7 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
   for (size_t i = 0; i < grid_size_global; i++) {
     pga_point_array[i].lon = &vs30_grid[i].lon;
     pga_point_array[i].lat = &vs30_grid[i].lat;
-    pga_point_array[i].hyp_distance = as2008_point_array[i].hyp_distance;
+    pga_point_array[i].hyp_distance = as2008_point_array[i].r_rup;
     pga_point_array[i].g = as2008_point_array[i].g * 100;
   };
 
