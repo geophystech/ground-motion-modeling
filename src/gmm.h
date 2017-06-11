@@ -51,6 +51,38 @@ typedef struct {
   double vs30;
 } VS30_point;
 
+// s-file parameters
+// http://seis.geus.net/software/seisan/node226.html
+typedef struct {
+  uint16_t year;
+  uint16_t month;
+  uint16_t day;
+  char fix_o_time;
+  uint16_t hour;
+  uint16_t minute;
+  double second;
+  char loc_model_ind;
+  char distance_ind;
+  char event_id;
+  double lat;
+  double lon;
+  double depth;
+  char depth_ind;
+  char loc_ind;
+  char *agency;
+  uint16_t sta_num;
+  double rms;
+  double m1;
+  char m1_type;
+  char *m1_agency;
+  double m2;
+  char m2_type;
+  char *m2_agency;
+  double m3;
+  char m3_type;
+  char m3_agency;
+} S_file;
+
 // earthquake location data
 typedef struct {
   double lat;
@@ -108,6 +140,8 @@ typedef struct {
 
 // Read VS30 grid file and return pointer to allocated array of VS30_points
 VS30_point *read_vs30_grid(const char *filename);
+// Read seisan S-file
+S_file read_s_file(const char *filename);
 // Parse config file
 size_t parse_config_file_desktop(const char *filename,
                                  DESKTOP_parameters *desktop_conf,

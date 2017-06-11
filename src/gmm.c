@@ -46,6 +46,13 @@ int main(int argc, char **argv) {
     scanf("%lf %lf %lf %lf %lf", &ptr_eq_location->lat, &ptr_eq_location->lon,
           &ptr_eq_location->depth, &ptr_eq_location->local_magnitude,
           &ptr_eq_location->moment_magnitude);
+  } else {
+    // get location from s-file
+    S_file s_file = read_s_file(argv[2]);
+    eq_location.lat = s_file.lat;
+    eq_location.lon = s_file.lon;
+    eq_location.depth = s_file.depth;
+    eq_location.local_magnitude = s_file.m1;
   }
 
   printf("\n--------------EARTHQUAKE LOCATION--------------- \n lat = %f\tlon "

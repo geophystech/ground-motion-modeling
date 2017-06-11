@@ -292,3 +292,53 @@ VS30_point *read_vs30_grid(const char *filename) {
   fclose(vs30_grid_file);
   return vs30_point_array;
 };
+
+S_file read_s_file(const char *filename){
+
+  // open file
+  FILE *seisan_file;
+  if ((seisan_file = fopen(filename, "r")) == NULL) {
+    perror("\n ERROR: S-file can not be openned");
+    exit(EXIT_FAILURE);
+  }
+
+  S_file s_file_in = {0};
+  char linetype;
+  char buff[20];
+  size_t line_len = 0;
+  char *parsing_line = NULL;
+  // get first line from S-file
+  // TODO: parse each line in loop for getting AMP values from s-file
+  // see example for parsing s-file
+  // http://earthworm.isti.com/trac/earthworm/browser/trunk/src/libsrc/util/nordic.c - earthworm project
+  // see s-file spec: http://seis.geus.net/software/seisan/node226.html
+  getline(&parsing_line, &line_len, seisan_file);
+  linetype = parsing_line[79];
+  switch (linetype) {
+	  // parse location parameters
+	  case '1':
+	  
+	  strncpy(buff, parsing_line + 23,7);
+	  buff[7]='\0';
+	  s_file_in.lat = (double) atof(buff);
+
+	  strncpy(buff, parsing_line + 30,8);
+	  buff[8]='\0';
+	  s_file_in.lon = (double) atof(buff);
+	
+	  strncpy(buff, parsing_line + 38,5);
+	  buff[5]='\0';
+	  s_file_in.depth = (double) atof(buff);
+
+	  strncpy(buff, parsing_line + 55,4);
+	  buff[4]='\0';
+	  s_file_in.m1 = (double) atof(buff);
+
+	break;
+  }
+
+  free(parsing_line);
+  fclose(seisan_file);
+  return s_file_in;
+
+};
