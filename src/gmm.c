@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
   if (argv[1] == NULL) {
     printf(" Usage:\n\t"
-           "gmm <path_to_config_file> <path_to_s_file>\n");
+           "gmm <path_to_config_file> [path_to_s_file]\n");
     exit(EXIT_SUCCESS);
 
   } else {
