@@ -1,0 +1,38 @@
+ 2014  219 1249  6.7 L  52.152 143.268  9.0  SAK  8 0.2 5.0LSAK                1
+ GAP=185        0.43       0.8     6.2  0.0 -0.2110E+00  0.1507E+04  0.1745E+03E
+ ACTION:UP  15-03-31 11:02 OP:andy STATUS:               ID:20140219124822 L   I
+ OLDACT:UP  14-06-09 13:32 OP:ALEX STATUS:               ID:20140219124822 L   3
+ OLDACT:UP  14-06-09 13:28 OP:ALEX STATUS:               ID:20140219124822 L   3
+ OLDACT:UP  14-06-09 11:19 OP:ALEX STATUS:               ID:20140219124822 L   3
+ OLDACT:UP  14-06-06 11:01 OP:olga STATUS:               ID:20140219124822 L   3
+ OLDACT:ARG 14-06-05 09:30 OP:olga STATUS:               ID:20140219124822 L   3
+ 2014-02-19-1248-22S.IMGG__027                                                 6
+ 2014-02-19-1247-24S.IMGG__252                                                 6
+ 2014-02-19-1246-39S.IMGG__054                                                 6
+ 2014-02-19-1246-39S.IMGG__108                                                 6
+ STAT SP IPHASW D HRMM SECON CODA AMPLIT PERI AZIMU VELO AIN AR TRES W  DIS CAZ7
+ CHIVOSZ IP     D 1249 14.25                              98    0.0210 39.3 351 
+ CHIVOSE ES       1249 20.50                              98    0.1210 39.3 351 
+ CHIVOSZ  IAML    1249 26.55     54886.5 0.58                          39.3 351 
+ NGLK SZ  IAML    1249 23.97     67000.1 0.26                          42.2 194 
+ NGL  BZ IP     D 1249 14.50                              97   -0.2110 42.2 194 
+ NGL  BE IS       1249 21.43                              97    0.1710 42.2 194 
+ LNSK SZ IP     D 1249 20.91                              65   -0.2110 80.9 175 
+ LNSK SN IS       1249 33.18                              65    0.2610 80.9 175 
+ LNSK SZ  IAML    1249 38.61     31048.5 0.64                          80.9 175 
+ ARGI SZ IP     D 1249 23.31                              65   -0.1810 96.6 203 
+ ARGI SN IS       1249 37.26                              65    0.0310 96.6 203 
+ SABO SZ IP   4 D 1249 24.65                              65   -1.31 0  113 349 
+ SABO SN ES   4   1249 40.41                              65   -1.32 0  113 349 
+ SABO SZ  IAML    1249 57.90     13220.6 0.61                           113 349 
+ TYV  BZ IP   4 D 1249 30.03                              49   -1.25 0  150 197 
+ TYV  BE IS   4   1249 48.62                              49   -2.78 0  150 197 
+ TYV  BZ  IAML    1250  5.97      5861.2 0.86                           150 197 
+ OKHA BZ EP   4 D 1249 30.96                              49   -1.80 0  162 352 
+ OKHA BZ  IAML    1249 44.66     13524.4 0.62                           162 352 
+ OKHA SN ES   4   1249 52.67                              49   -1.44 0  162 352 
+ NKL  EZ IP   4 C 1249 37.48                              49   -0.94 0  207 303 
+ NKL  EN ES   4   1250 00.20                              49   -4.21 0  207 303 
+ UGL1 BZ IP   4 D 1249 56.56                              49   -0.05 0  353 194 
+ A732 BZ IP   4 D 1250  2.54                              49   -0.19 0  402 213 
+                                                                                
