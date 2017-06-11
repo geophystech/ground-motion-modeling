@@ -10,19 +10,19 @@ The ground motion evaluation module
 
 # Desktop
 
-Using:
+**Using:**
 ```
 gmm <path_to_config_file> [path_to_s_file]
 ```
 
-Example:
+**Example:**
 ```
 bin/gmm examples/configs/gmm.conf examples/seisan/19-1248-22L.S201402
 ```
 
 The PGA xyz data `lon lat %g` will be saved to `gmm_pga_out.xyz` file in the same directory.
 
-Run without s-file: 
+**Example without s-file:**
 ```
 echo "51.92 143.04 13.0 6.0 0" | bin/gmm examples/configs/gmm.conf
 ```
