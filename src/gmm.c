@@ -41,17 +41,11 @@ int main(int argc, char **argv) {
   print_as2008_parameters(ptr_as2008_conf, NULL);
 
   if (argv[2] == NULL) {
-    puts("\nNo S-file given, please enter earthquake parameters:");
-    printf("Lat=");
-    scanf("%lf", &ptr_eq_location->lat);
-    printf("Lon=");
-    scanf("%lf", &ptr_eq_location->lon);
-    printf("Depth=");
-    scanf("%lf", &ptr_eq_location->depth);
-    printf("Ml=");
-    scanf("%lf", &ptr_eq_location->local_magnitude);
-    printf("Mw=");
-    scanf("%lf", &ptr_eq_location->moment_magnitude);
+    puts("\nNo S-file given, please enter earthquake parameters");
+    printf("Lat\tLon\tDepth\tMl\tMw:\n");
+    scanf("%lf %lf %lf %lf %lf", &ptr_eq_location->lat, &ptr_eq_location->lon,
+          &ptr_eq_location->depth, &ptr_eq_location->local_magnitude,
+          &ptr_eq_location->moment_magnitude);
   }
 
   printf("\n--------------EARTHQUAKE LOCATION--------------- \n lat = %f\tlon "
