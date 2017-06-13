@@ -62,6 +62,16 @@ size_t parse_config_file_desktop(const char *filename,
     exit(EXIT_FAILURE);
   }
 
+  char *desktop_min_pga_config = "min_pga";
+  ptr_desktop_conf->min_pga = g_key_file_get_double(
+      config_file, desktop, desktop_min_pga_config, &gerror);
+  if (gerror != NULL) {
+    printf("\n ERROR (%d) while reading config: %s\n", gerror->code,
+           gerror->message);
+    g_error_free(gerror);
+    exit(EXIT_FAILURE);
+  }
+  
   // Model names set
   char *as2008 = "AS2008";
 

@@ -78,7 +78,7 @@ int main(int argc, char **argv) {
 
   // OUT
   char *pga_grid_out_file_name = PGA_GRID_FILE_NAME;
-  print_pga_grid(pga_grid, pga_grid_out_file_name);
+  print_pga_grid(ptr_desktop_conf, pga_grid, pga_grid_out_file_name);
 
   // for (size_t i = 0; i < grid_size_global; i++) {
   //  printf("%lf %lf %lf\n", vs30_grid[i].lon, vs30_grid[i].lat,
@@ -135,7 +135,8 @@ void print_as2008_parameters(const AS2008_parameters *const as2008_conf,
   }
 };
 
-void print_pga_grid(const GMM_point_pga *const pga_grid_const,
+void print_pga_grid(const DESKTOP_parameters *const desktop_config,
+                    const GMM_point_pga *const pga_grid_const,
                     const char *const filename) {
 
   if (filename != NULL) {
@@ -147,8 +148,10 @@ void print_pga_grid(const GMM_point_pga *const pga_grid_const,
     }
 
     for (size_t i = 0; i < grid_size_global; i++) {
-      fprintf(pga_grid_out_file, "%lf %lf %3.2lf\n", *pga_grid_const[i].lon,
-              *pga_grid_const[i].lat, pga_grid_const[i].g);
+      if (pga_grid_const[i].g >= desktop_config->min_pga) {
+        fprintf(pga_grid_out_file, "%lf %lf %3.2lf\n", *pga_grid_const[i].lon,
+                *pga_grid_const[i].lat, pga_grid_const[i].g);
+      }
     };
     printf("\n PGA grid printed to %s file\n", filename);
     fclose(pga_grid_out_file);

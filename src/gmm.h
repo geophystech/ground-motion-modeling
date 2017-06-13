@@ -42,6 +42,7 @@ int64_t grid_size_global;
 typedef struct {
   char *vs30_file_config;
   char *base_model;
+  double min_pga;
 } DESKTOP_parameters;
 
 // VS30 data point
@@ -155,5 +156,6 @@ void print_as2008_parameters(const AS2008_parameters *const AS2008_conf,
                              const char *const filename);
 void print_as2008_points(const AS2008_point *const AS2008_point_array_const,
                          const char *const filename);
-void print_pga_grid(const GMM_point_pga *const pga_grid_const,
+void print_pga_grid(const DESKTOP_parameters *const desktop_config,
+                    const GMM_point_pga *const pga_grid_const,
                     const char *const filename);
