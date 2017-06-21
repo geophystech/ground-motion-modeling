@@ -29,4 +29,4 @@ The PGA xyz data `lon lat %g` will be saved to `gmm_pga_out.xyz` file in the sam
 
 **The meaning of some variables in this implementation:**
 
-`a12 * Frv` = 0, `a13 * Fnm` = 0, `a15 * Fas` = 0, `Fhw * f4(Rjb, Rrup, Rx, W, S, Ztor, Mw)` = 0, `f6(Ztor)` = 0, `f10(Z1.0, Vs30)` = 0.
+`a12 * Frv = 0`, `a13 * Fnm = 0`, `a15 * Fas = 0`, `Fhw * f4(Rjb, Rrup, Rx, W, S, Ztor, Mw) = 0`, `f6(Ztor) = 0`, `f10(Z1.0, Vs30) = 0`.
