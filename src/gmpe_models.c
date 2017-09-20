@@ -38,13 +38,13 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
 
   if (magnitude < 5.5) {
     as2008_in.t6 = 1;
-  };
+  }
   if (magnitude <= 6.5 && magnitude >= 5.5) {
     as2008_in.t6 = (0.5 * (6.5 - magnitude) + 0.5);
-  };
+  }
   if (magnitude > 6.5) {
     as2008_in.t6 = 0.5;
-  };
+  }
 
   //
   // AS2008 PGA modeling
@@ -84,7 +84,7 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
       as2008_point_array[i].f8 = as2008_in.a18 *
                                  (as2008_point_array[i].r_rup - 100) *
                                  as2008_in.t6;
-    };
+    }
 
     // pga 1100
     as2008_point_array[i].pga1100 =
@@ -110,13 +110,13 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
     } else {
       as2008_point_array[i].f5 = (as2008_in.a10 + as2008_in.b * as2008_in.n) *
                                  log(as2008_in.v1 / as2008_in.vlin);
-    };
+    }
 
     // pga
     as2008_point_array[i].g =
         exp(as2008_point_array[i].f1 + as2008_point_array[i].f5 +
             as2008_point_array[i].f8);
-  };
+  }
 
   // memory allocation for PGA points
   GMM_point_pga *pga_point_array;
@@ -129,7 +129,7 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
     pga_point_array[i].lat = &vs30_grid[i].lat;
     pga_point_array[i].r_rup = as2008_point_array[i].r_rup;
     pga_point_array[i].g = as2008_point_array[i].g * 100;
-  };
+  }
 
   // print_as2008_points(as2008_point_array, NULL);
 
@@ -137,5 +137,5 @@ GMM_point_pga *as2008_gmpe(const Earthquake eq, AS2008_parameters as2008_in,
   free(as2008_point_array);
 
   return pga_point_array;
-};
+}
 

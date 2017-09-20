@@ -250,7 +250,7 @@ size_t parse_config_file_desktop(const char *filename,
   g_key_file_free(config_file);
 
   return (EXIT_SUCCESS);
-};
+}
 
 VS30_point *read_vs30_grid(const char *filename) {
 
@@ -294,14 +294,14 @@ VS30_point *read_vs30_grid(const char *filename) {
       exit(EXIT_FAILURE);
     } else {
       line_number++;
-    };
-  };
+    }
+  }
   free(parsing_line);
 
   // close file and return pointer
   fclose(vs30_grid_file);
   return vs30_point_array;
-};
+}
 
 S_file read_s_file(const char *filename){
 
@@ -351,4 +351,4 @@ S_file read_s_file(const char *filename){
   fclose(seisan_file);
   return s_file_in;
 
-};
+}
